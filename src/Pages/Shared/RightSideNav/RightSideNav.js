@@ -1,6 +1,6 @@
 import React from 'react';
 
-const rightSideNav = () => {
+const RightSideNav = () => {
     return (
         <div>
             <h2>This is Right Side Nav</h2>
@@ -8,4 +8,4 @@ const rightSideNav = () => {
     );
 };
 
-export default rightSideNav;
+export default RightSideNav;
