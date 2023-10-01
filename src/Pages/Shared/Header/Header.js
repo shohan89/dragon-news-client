@@ -1,16 +1,18 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import LeftSideNav from '../LeftSideNav/LeftSideNav';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import LeftSideNav from "../LeftSideNav/LeftSideNav";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-    return (
-        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary mb-4">
+  return (
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary mb-4">
       <Container>
-        <Navbar.Brand><Link to='/'>Dragon News</Link></Navbar.Brand>
+        <Navbar.Brand>
+          <Link to="/">Dragon News</Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -34,13 +36,13 @@ const Header = () => {
               Dank memes
             </Nav.Link>
           </Nav>
-          <div className='d-lg-none'>
+          <div className="d-lg-none">
             <LeftSideNav />
           </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    );
+  );
 };
 
 export default Header;
