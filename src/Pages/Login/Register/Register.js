@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [error, setError] = useState("");
-  const { createUser } = useContext(AuthContext);
+  const [accepted, setAccepted] = useState(false);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,12 +23,28 @@ const Register = () => {
         console.log(user);
         setError("");
         form.reset();
+        handleUpdateUserProfile(name, photoURL);
       })
       .catch((error) => {
         console.error(error);
         setError(error.message);
       });
   };
+
+  const handleUpdateUserProfile = (name, photoURL) =>{
+    const profile = {
+      displayName: name,
+      photoURL: photoURL
+    }
+    updateUserProfile(profile)
+      .then(()=>{})
+      .catch(error=>console.error(error));
+  }
+
+  const handleAccepted = event => {
+    setAccepted(event.target.checked);
+  }
+
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -59,10 +77,17 @@ const Register = () => {
           required
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check 
+        name="checked"
+        onClick={ handleAccepted }
+        type="checkbox" 
+        label={<>Accept our <Link to='/terms-and-conditions'>terms and conditions</Link>.</>} />
+      </Form.Group>
+      <Button variant="primary" type="submit" disabled={!accepted}>
         Register
       </Button>
-      <Form.Text className="text-danger">{ error }</Form.Text>
+      <Form.Text className="text-danger">{error}</Form.Text>
     </Form>
   );
 };
